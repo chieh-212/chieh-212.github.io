@@ -49,7 +49,7 @@ binwalk -e THJCC_IMAGE.png
 最後看一下F3.png就有flag了
 
 ### Provisioning in Progress
-![problem](../../assets/asn.png)
+![problem](../../assets/ASN.png)
 ##### flag:
 ```thjcc{only_announced_prefixes_are_real}```
 
