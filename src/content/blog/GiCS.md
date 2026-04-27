@@ -5,10 +5,10 @@ pubDate: 2026-05-31
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 # GiCS2026_writeup
-scoreboard: 一隻小熊在跳舞呼啦呼啦啦
-final score: 3555 points  
-final place: 2rd
-member: m3tr0, 鴨鴨, 邦邦邦邦
+scoreboard: 一隻小熊在跳舞呼啦呼啦啦 
+final score:   
+final place: 
+member: m3tr0, 鴨鴨, 邦邦邦邦 
 
 ## 第一題
 ##### discription:
@@ -53,18 +53,6 @@ member: m3tr0, 鴨鴨, 邦邦邦邦
 解法：
 
 ## 第八題
-##### discription:
-##### flag:
-`FLAG`
-解法：
-
-## 第九題
-##### discription:
-##### flag:
-`FLAG`
-解法：
-
-## 第十題
 ##### discription:
 ##### flag:
 `FLAG`
