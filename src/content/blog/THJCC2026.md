@@ -66,7 +66,7 @@ whois -h whois.ripe.net -i origin AS201943
 base64完再把字串反向就是flag了  
 
 ### Metro
-![problem](../../assets/metro.png)
+![problem](../../assets/Metro.png)
 ##### flag:
 ```THJCC{A10-3F}```
 
