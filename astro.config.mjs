@@ -3,9 +3,9 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
+  site: 'https://m3tr0.github.io', // 你的個人網址
+  base: '/',                       // 個人主站 (m3tr0.github.io) 必須用 '/'
 });

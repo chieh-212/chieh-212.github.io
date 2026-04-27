@@ -1,20 +1,129 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+    const posts = await getCollection('blog');
+    return posts.map((post) => ({
+        params: { slug: post.slug || post.id.replace(/\.(md|mdx)$/, '') },
+        props: { post },
+    }));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<BaseLayout title={`${post.data.title} | m3tr0's blog`}>
+    <nav class="nav-header">
+        <a href="/" class="back-btn">← all posts</a>
+    </nav>
+    
+    <article class="article-container">
+        <header class="article-header">
+            <div class="meta">
+                <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+                {post.data.tags && (
+                    <div class="tags-list">
+                        {post.data.tags.map(tag => (
+                            <span class="tag">#{tag}</span>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <h1>{post.data.title}</h1>
+            <p class="description">{post.data.description}</p>
+        </header>
+        
+        <hr class="divider" />
+
+        <div class="article-body">
+            <Content />
+        </div>
+    </article>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            const blocks = document.querySelectorAll('pre');
+            blocks.forEach((block) => {
+                const button = document.createElement('button');
+                button.innerText = 'copy';
+                button.className = 'copy-code';
+                block.appendChild(button);
+
+                button.addEventListener('click', async () => {
+                    const text = block.querySelector('code').innerText;
+                    await navigator.clipboard.writeText(text);
+                    button.innerText = 'copied!';
+                    setTimeout(() => { button.innerText = 'copy'; }, 2000);
+                });
+            });
+        });
+    </script>
+</BaseLayout>
+
+<style>
+    /* 導航與返回按鈕 */
+    .nav-header { margin-bottom: 3rem; }
+    .back-btn { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .back-btn:hover { color: var(--link-hover); }
+    
+    /* 文章標題區塊 */
+    .article-header { margin-bottom: 2rem; }
+    .meta { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1rem; }
+    .meta time { font-family: monospace; font-size: 0.9rem; color: var(--text-muted); }
+    .tags-list { display: flex; gap: 0.6rem; }
+    .tag { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
+    
+    .article-header h1 { font-size: 2.8rem; margin: 0 0 1rem 0; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+    .description { font-size: 1.2rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+    
+    .divider { border: 0; border-top: 1px solid var(--btn-border); margin: 3rem 0; opacity: 0.5; }
+
+    /* 文章主體內容 */
+    .article-body { line-height: 1.8; font-size: 1.1rem; color: var(--text-color); }
+    .article-body :global(p) { margin-bottom: 1.6rem; }
+    .article-body :global(h2) { margin: 3rem 0 1.2rem 0; font-size: 1.8rem; }
+    .article-body :global(h3) { margin: 2rem 0 1rem 0; font-size: 1.4rem; }
+
+    /* 程式碼區塊修復 (HackMD/GitHub 風格) */
+    .article-body :global(pre) {
+        position: relative;
+        padding: 1.2rem;
+        border-radius: 8px;
+        background-color: #1e1e1e !important; 
+        margin: 2rem 0;
+        overflow-x: auto;
+    }
+    .article-body :global(pre code) {
+        background: transparent !important;
+        padding: 0 !important;
+        font-family: 'Fira Code', 'Cascadia Code', monospace;
+        font-size: 0.95rem;
+        color: #e0e0e0;
+        line-height: 1.5;
+    }
+
+    /* 複製按鈕 */
+    :global(.copy-code) {
+        position: absolute;
+        top: 0.6rem;
+        right: 0.6rem;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.75rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s, background 0.2s;
+    }
+    .article-body :global(pre:hover) :global(.copy-code) { opacity: 1; }
+    :global(.copy-code:hover) { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+    @media (max-width: 600px) {
+        .article-header h1 { font-size: 2rem; }
+        .article-body { font-size: 1rem; }
+    }
+</style>
