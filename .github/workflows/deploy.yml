@@ -17,15 +17,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 加上這一步，強制使用 Node 22
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 22  # 強制指定 Node 22
           cache: 'npm'
 
-      - name: Install, build, and upload
-        uses: withastro/action@v3
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Astro
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # Astro 編譯後的輸出資料夾
 
   deploy:
     needs: build
