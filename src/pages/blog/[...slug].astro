@@ -75,7 +75,8 @@ const { Content } = await render(post);
     .tags-list { display: flex; gap: 0.6rem; }
     .tag { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
     
-    .article-header h1 { font-size: 2.8rem; margin: 0 0 1rem 0; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-color); }
+    /* 終極修正：強制指定為變數色彩，並加載 !important 權重 */
+    .article-header h1 { font-size: 2.8rem; margin: 0 0 1rem 0; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-color) !important; }
     .description { font-size: 1.2rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
     
     .divider { border: 0; border-top: 1px solid var(--border-color); margin: 3rem 0; opacity: 0.5; }
