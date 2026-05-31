@@ -11,7 +11,10 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
+// 只保留 h1 到 h4
+const tocHeadings = headings.filter((heading) => heading.depth <= 4);
 ---
 
 <BaseLayout title={`${post.data.title} | m3tr0's blog`}>
@@ -19,134 +22,151 @@ const { Content } = await render(post);
         <a href="/" class="back-btn">← all posts</a>
     </nav>
     
-    <article class="article-container">
-        <header class="article-header">
-            <div class="meta">
-                <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
-                {post.data.tags && (
-                    <div class="tags-list">
-                        {post.data.tags.map(tag => (
-                            <span class="tag">#{tag}</span>
-                        ))}
-                    </div>
-                )}
-            </div>
-            <h1>{post.data.title}</h1>
-            <p class="description">{post.data.description}</p>
-        </header>
-        
-        <hr class="divider" />
+    <div class="main-layout">
+        <article class="article-container">
+            <header class="article-header">
+                <div class="meta">
+                    <time>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+                    {post.data.tags && (
+                        <div class="tags-list">
+                            {post.data.tags.map(tag => (
+                                <span class="tag">#{tag}</span>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                <h1>{post.data.title}</h1>
+                <p class="description">{post.data.description}</p>
+            </header>
+            
+            <hr class="divider" />
 
-        <div class="article-body">
-            <Content />
-        </div>
-    </article>
+            <div class="article-body">
+                <Content />
+            </div>
+        </article>
+
+        {tocHeadings.length > 0 && (
+            <aside class="toc-sidebar">
+                <div class="toc-title">目錄</div>
+                <ul class="toc-list">
+                    {tocHeadings.map((heading) => (
+                        <li class={`depth-${heading.depth}`}>
+                            <a href={`#${heading.slug}`}>{heading.text}</a>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        )}
+    </div>
 
     <script is:inline>
         document.addEventListener('DOMContentLoaded', () => {
+            // 複製按鈕
             const blocks = document.querySelectorAll('pre');
             blocks.forEach((block) => {
                 const button = document.createElement('button');
                 button.innerText = 'copy';
                 button.className = 'copy-code';
                 block.appendChild(button);
-
                 button.addEventListener('click', async () => {
-                    const text = block.querySelector('code').innerText;
-                    await navigator.clipboard.writeText(text);
+                    const codeBlock = block.querySelector('code');
+                    if (!codeBlock) return;
+                    await navigator.clipboard.writeText(codeBlock.innerText);
                     button.innerText = 'copied!';
                     setTimeout(() => { button.innerText = 'copy'; }, 2000);
                 });
+            });
+
+            // 滾動高亮
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        tocLinks.forEach((link) => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.toc-list a[href="#${entry.target.id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                });
+            }, { rootMargin: "0px 0px -80% 0px" });
+
+            document.querySelectorAll('.article-body h1, .article-body h2, .article-body h3, .article-body h4').forEach((heading) => {
+                observer.observe(heading);
             });
         });
     </script>
 </BaseLayout>
 
 <style>
-    /* 導航與返回按鈕 */
-    .nav-header { margin-bottom: 3rem; }
-    .back-btn { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    .back-btn:hover { color: var(--link-hover); }
-    
-    /* 文章標題區塊 */
-    .article-header { margin-bottom: 2rem; }
-    .meta { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1rem; }
-    .meta time { font-family: monospace; font-size: 0.9rem; color: var(--text-muted); }
-    .tags-list { display: flex; gap: 0.6rem; }
-    .tag { font-size: 0.85rem; color: var(--text-muted); opacity: 0.8; }
-    
-    /* 終極修正：強制指定為變數色彩，並加載 !important 權重 */
-    .article-header h1 { font-size: 2.8rem; margin: 0 0 1rem 0; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-color) !important; }
-    .description { font-size: 1.2rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
-    
-    .divider { border: 0; border-top: 1px solid var(--border-color); margin: 3rem 0; opacity: 0.5; }
+    :global(html) { scroll-behavior: smooth; }
 
-    /* 文章主體內容 */
-    .article-body { line-height: 1.8; font-size: 1.1rem; color: var(--text-color); }
-    .article-body :global(p) { margin-bottom: 1.6rem; }
-    
-    .article-body :global(h1),
-    .article-body :global(h2),
-    .article-body :global(h3),
-    .article-body :global(h4),
-    .article-body :global(h5),
-    .article-body :global(h6) {
-        color: var(--text-color);
-    }
-    .article-body :global(h2) { margin: 3rem 0 1.2rem 0; font-size: 1.8rem; }
-    .article-body :global(h3) { margin: 2rem 0 1rem 0; font-size: 1.4rem; }
-    .article-body :global(h4) { margin: 2rem 0 0.9rem 0; font-size: 1.1rem; }
-    
-    /* 修正：大幅縮小 h5 的間距 */
-    .article-body :global(h5) { margin: 1.6rem 0 0.1rem 0 !important; font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; }
-
-    /* 全域限制文章內圖片 */
-    .article-body :global(img) {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 2rem auto;
-        border-radius: 8px;
-    }
-
-    /* 程式碼區塊修復 (HackMD/GitHub 風格) */
-    .article-body :global(pre) {
+    /* 設定主佈局為相對定位，好讓目錄可以參考它的位置 */
+    .main-layout {
         position: relative;
-        padding: 1.2rem;
-        border-radius: 8px;
-        background-color: #1e1e1e !important; 
-        margin: 1.6rem 0;
-        overflow-x: auto;
-    }
-    .article-body :global(pre code) {
-        background: transparent !important;
-        padding: 0 !important;
-        font-family: 'Fira Code', 'Cascadia Code', monospace;
-        font-size: 0.95rem;
-        color: #e0e0e0;
-        line-height: 1.5;
+        max-width: 800px; /* 這裡設定文章的最大寬度 */
+        margin: 0 auto;   /* 置中 */
     }
 
-    /* 複製按鈕 */
-    :global(.copy-code) {
-        position: absolute;
-        top: 0.6rem;
-        right: 0.6rem;
-        padding: 0.2rem 0.6rem;
-        font-size: 0.75rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: #aaa;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 0;
-        transition: opacity 0.2s, background 0.2s;
+    .article-container { width: 100%; }
+
+    /* 導航與標題樣式 (保持你原本的樣式) */
+    .nav-header { margin-bottom: 3rem; }
+    .back-btn { font-size: 0.9rem; color: var(--text-muted); text-decoration: none; }
+    .article-header h1 { font-size: 2.8rem; margin: 0 0 1rem 0; font-weight: 700; color: var(--text-color) !important; }
+    .description { font-size: 1.2rem; color: var(--text-muted); line-height: 1.5; }
+    .divider { border: 0; border-top: 1px solid var(--border-color); margin: 3rem 0; opacity: 0.5; }
+    .article-body { line-height: 1.8; font-size: 1.1rem; color: var(--text-color); }
+    .article-body :global(h1), .article-body :global(h2), .article-body :global(h3), .article-body :global(h4) { 
+        color: var(--text-color); 
+        scroll-margin-top: 4rem; 
     }
+
+    /* 程式碼區塊 (保持你原本正常的樣式) */
+    .article-body :global(pre) { position: relative; padding: 1.2rem; border-radius: 8px; background-color: #1e1e1e !important; margin: 1.6rem 0; overflow-x: auto; }
+    .article-body :global(pre code) { background: transparent !important; padding: 0 !important; color: #e0e0e0; }
+    :global(.copy-code) { position: absolute; top: 0.6rem; right: 0.6rem; padding: 0.2rem 0.6rem; font-size: 0.75rem; background: rgba(255, 255, 255, 0.1); color: #aaa; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; cursor: pointer; opacity: 0; }
     .article-body :global(pre:hover) :global(.copy-code) { opacity: 1; }
-    :global(.copy-code:hover) { background: rgba(255, 255, 255, 0.2); color: #fff; }
 
-    @media (max-width: 600px) {
-        .article-header h1 { font-size: 2rem; }
-        .article-body { font-size: 1rem; }
+    /* =========================================
+       HackMD 風格目錄 (修正定位)
+    ========================================= */
+    .toc-sidebar {
+        position: fixed;
+        /* 核心定位邏輯：
+           1. 先移到螢幕中央 (left: 50%)
+           2. 往右推文章寬度的一半 (400px) 
+           3. 再加一點間距 (例如 40px) */
+        left: calc(50% + 440px); 
+        top: 8rem;
+        width: 200px;
+        max-height: 70vh;
+        border-left: 2px solid var(--border-color);
+        padding-left: 1.2rem;
+        
+        /* 隱藏醜醜的滾動條 */
+        overflow-y: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    .toc-sidebar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+    .toc-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 1px; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li { margin-bottom: 0.5rem; }
+    .toc-list a { display: block; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .toc-list a:hover { color: var(--text-color); }
+    .toc-list a.active { color: rgb(var(--accent)); font-weight: 600; }
+
+    /* 層級縮排 */
+    .toc-list .depth-3 { margin-left: 1rem; }
+    .toc-list .depth-4 { margin-left: 2rem; }
+
+    /* 如果螢幕寬度不足以放下目錄 (800px 文章 + 200px 目錄 + 間距)，則隱藏 */
+    @media (max-width: 1250px) {
+        .toc-sidebar { display: none; }
+    }
+
+    @media (max-width: 800px) {
+        .main-layout { padding: 0 1rem; }
     }
 </style>
