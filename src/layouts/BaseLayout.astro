@@ -45,6 +45,10 @@ const { title = "m3tr0's blog" } = Astro.props;
         ::selection { background-color: var(--selection-bg); }
         a { color: var(--link-color); text-decoration: none; transition: color 0.2s ease; }
         a:hover { color: var(--link-hover); }
+        
+        /* 全域圖片修正，防止跑版 */
+        img { max-width: 100%; height: auto; border-radius: 8px; display: block; }
+        
         .container { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem; min-height: 100vh; display: flex; flex-direction: column; }
         
         header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 4rem; }
@@ -78,7 +82,8 @@ const { title = "m3tr0's blog" } = Astro.props;
         </header>
 
         <main>
-            <slot /> </main>
+            <slot />
+        </main>
 
         <footer>
             <p>&copy; 2026 m3tr0. Minimalist Blog.</p>
@@ -89,19 +94,22 @@ const { title = "m3tr0's blog" } = Astro.props;
         const toggleBtn = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        function updateButtonText(theme) {
+        function updateButtonText(theme: string | null) {
+            if (!toggleBtn) return;
             toggleBtn.textContent = theme === 'dark' ? 'light' : 'dark';
         }
 
-        updateButtonText(html.getAttribute('data-theme'));
+        updateButtonText(html.getAttribute('data-theme') ?? 'light');
 
-        toggleBtn.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateButtonText(newTheme);
-        });
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateButtonText(newTheme);
+            });
+        }
     </script>
 </body>
 </html>

@@ -4,80 +4,80 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2 class="logo"><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">posts</HeaderLink>
-			<HeaderLink href="/about">about</HeaderLink>
-			<button id="theme-toggle">light</button>
-		</div>
-	</nav>
+    <nav>
+        <h2 class="logo"><a href="/">{SITE_TITLE}</a></h2>
+        <div class="internal-links">
+            <HeaderLink href="/">posts</HeaderLink>
+            <HeaderLink href="/about">about</HeaderLink>
+            <button id="theme-toggle">light</button>
+        </div>
+    </nav>
 </header>
 
 <style>
-	header {
-		margin: 0;
-		padding: 2rem 0; /* 上下留白 */
-		border-bottom: 1px solid #333; /* 圖片中那條細橫線 */
-		margin-bottom: 3rem;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between; /* 左右分開 */
-		max-width: 960px;
-		margin: 0 auto;
-		padding: 0 1rem;
-	}
-	.logo {
-		margin: 0;
-		font-size: 1.25rem;
-		font-weight: 700;
-	}
-	.logo a {
-		text-decoration: none;
-		color: #fff;
-	}
-	.internal-links {
-		display: flex;
-		align-items: center;
-		gap: 1.2rem;
-	}
-	.internal-links :global(a) {
-		color: #ccc;
-		text-decoration: none;
-		font-size: 0.95rem;
-	}
-	.internal-links :global(a.active) {
-		color: #fff;
-		text-decoration: underline;
-		text-underline-offset: 4px;
-	}
-	
-	/* 亮暗按鈕樣式 */
-	#theme-toggle {
-		background: transparent;
-		border: 1px solid #444;
-		color: #ccc;
-		padding: 2px 8px;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 0.85rem;
-		font-family: inherit;
-	}
-	#theme-toggle:hover {
-		border-color: #888;
-		color: #fff;
-	}
+    header {
+        margin: 0;
+        padding: 2rem 0; 
+        border-bottom: 1px solid var(--border-color); 
+        margin-bottom: 3rem;
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .logo {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+    .logo a {
+        text-decoration: none;
+        color: var(--text-color);
+    }
+    .internal-links {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    .internal-links :global(a) {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+    }
+    .internal-links :global(a.active) {
+        color: var(--text-color);
+        font-weight: bold;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+    
+    /* 亮暗按鈕樣式 */
+    #theme-toggle {
+        background: transparent;
+        border: 1px solid var(--btn-border);
+        color: var(--text-color);
+        padding: 2px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: inherit;
+    }
+    #theme-toggle:hover {
+        border-color: var(--text-muted);
+        color: var(--text-color);
+    }
 </style>
 
 <script is:inline>
-	// 簡單的模擬腳本
-	const btn = document.getElementById('theme-toggle');
-	if (btn) {
-		btn.addEventListener('click', () => {
-			const isLight = document.documentElement.classList.toggle('light');
-			btn.innerText = isLight ? 'dark' : 'light';
-		});
-	}
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const isLight = document.documentElement.classList.toggle('light');
+            btn.innerText = isLight ? 'dark' : 'light';
+        });
+    }
 </script>

@@ -1,114 +1,78 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
-// 取得文章並按日期排序
+// 取得文章並排序
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 100%;
-				max-width: 720px;
-				margin: 0 auto;
-				padding: 3em 1em;
-			}
-			ul {
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				margin-bottom: 2.5rem;
-				border-bottom: 1px solid var(--border-color);
-				padding-bottom: 1.5rem;
-			}
-			ul li:last-child {
-				border-bottom: none;
-			}
-			ul li a {
-				display: block;
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			.title {
-				margin: 0 0 0.5rem 0;
-				color: var(--text-color);
-				line-height: 1.2;
-				font-size: 1.5rem;
-				font-weight: 600;
-			}
-			.date {
-				margin: 0 0 0.75rem 0;
-				color: var(--text-muted);
-				font-family: monospace;
-				font-size: 0.9rem;
-			}
-			.tags {
-				display: flex;
-				gap: 0.5rem;
-				margin-top: 0.5rem;
-			}
-			.tag {
-				font-size: 0.8rem;
-				color: #888;
-			}
-			.description {
-				margin: 0;
-				color: var(--text-muted);
-				font-size: 1rem;
-				line-height: 1.5;
-			}
-			
-			/* Hover 效果 */
-			ul li a:hover .title {
-				color: rgb(var(--accent));
-			}
+<BaseLayout title="m3tr0's posts">
+    <div class="posts-container">
+        <ul>
+            {
+                posts.map((post) => (
+                    <li>
+                        <a href={`/blog/${post.id.replace(/\.(md|mdx)$/, '')}/`}>
+                            <h4 class="title">{post.data.title}</h4>
+                            <p class="date">
+                                <FormattedDate date={post.data.pubDate} />
+                            </p>
+                            {post.data.tags && (
+                                <div class="tags">
+                                    {post.data.tags.map((tag) => (
+                                        <span class="tag">#{tag}</span>
+                                    ))}
+                                </div>
+                            )}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</BaseLayout>
 
-			@media (max-width: 720px) {
-				main { padding: 2em 1em; }
-				.title { font-size: 1.3rem; }
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.slug || post.id.replace(/\.(md|mdx)$/, '')}/`}>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-									<h4 class="title">{post.data.title}</h4>
-									<p class="description">{post.data.description}</p>
-									{post.data.tags && (
-										<div class="tags">
-											{post.data.tags.map((tag) => (
-												<span class="tag">#{tag}</span>
-											))}
-										</div>
-									)}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<style>
+    .posts-container {
+        margin-top: -1rem;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    ul li {
+        margin-bottom: 2.5rem;
+    }
+    .title {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+    .date {
+        margin: 0;
+        color: var(--text-muted);
+        font-family: monospace;
+        font-size: 0.9rem;
+    }
+    .tags {
+        display: flex;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+    }
+    .tag {
+        font-size: 0.8rem;
+        color: var(--text-muted); 
+        opacity: 0.7;
+    }
+    ul li a {
+        text-decoration: none;
+    }
+    ul li a:hover .title {
+        text-decoration: underline;
+    }
+</style>
