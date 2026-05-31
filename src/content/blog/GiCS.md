@@ -14,13 +14,15 @@ member: EH, 鴨鴨, 邦邦邦邦
 我也在等官方的解題影片XD   
 
 ## 第二題  
-##### discription: 好問題，我只記得重點是有機密資訊洩漏  
+##### discription: 
+好問題，我只記得重點是有機密資訊洩漏  
 ##### flag:  
 `GICS{source_code_leakage_w1th_history}`  
 解法：git commit leak，總之把githack裝來用無腦翻commit就好  
 
 ## 第五題  
-##### discription: 警衛有在守門但不多，你裝得夠像從AS7539來的就可以拿到flag  
+##### discription: 
+警衛有在守門但不多，你裝得夠像從AS7539來的就可以拿到flag  
 ##### flag:  
 `GICS{a_straight_XFF_bypass_br1ng_you_the_flag}`  
 解法：  
@@ -32,7 +34,8 @@ GICS{a_straight_XFF_bypass_br1ng_you_the_flag}
 ```
 
 ## 第六題  
-##### discription:我忘記了:)  
+##### discription: 
+我忘記了:)  
 ##### flag:  
 `GICS{have_your_he4rd_about_pylingual?}`  
 解法：.pyc decompiler  
@@ -142,7 +145,8 @@ if __name__ == '__main__':
 ~~據說鴨鴨有問邦邦這要怎麼復原，然後邦邦叫他土法煉鋼，快笑死，反正是拿到flag了~~  
 
 ## 第十題  
-##### discription:總之就是RSA，然後題目直接說小明覺得n, e, c洩漏沒差  
+##### discription: 
+總之就是RSA，然後題目直接說小明覺得n, e, c洩漏沒差  
 ##### flag:  
 `GICS{factoring_N_looks_easy_w1th_quantum_computers}`  
 解法：  
