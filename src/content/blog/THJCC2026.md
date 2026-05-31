@@ -15,81 +15,81 @@ final public place: 44th
 也歡迎直接DC私訊我告訴我哪裡寫錯或修改建議 --> chiehhhhh_
 ## Welcome
 ### Welcome to THJCC CTF
-![problem](../../assets/welcome.png)
+![problem](../../assets/welcome.png) 
 ##### flag:
 ```THJCC{We1c0m3-tO-tHjcC-c7F_2O26}```
 
-~~喔剛好截到完整flag欸好棒喔~~  
+~~喔剛好截到完整flag欸好棒喔~~ 
 F12 & ctrl+C & ctrl+V 
 
 ### Feedback Form !
-![problem](../../assets/feedback.png)
+![problem](../../assets/feedback.png) 
 ##### flag:
 ```THJCC{Thanks_\O/_L0vU}```
 
-~~叫別人填然後偷他的flag~~  
+~~叫別人填然後偷他的flag~~ 
 ## Reverse
 ### Super baby reverse
-![problem](../../assets/reverse.png)
+![problem](../../assets/reverse.png) 
 ##### flag:
-```THJCC{BaBY_r3v3rs3_f0r_beggin3r}```
+```THJCC{BaBY_r3v3rs3_f0r_beggin3r}``` 
 IDA打開就看到flag躺在那裏了
 ## Misc
 ### IMAGE?
-![problem](../../assets/image.png)
+![problem](../../assets/image.png) 
 ##### flag:
 ```THJCC{fRierEN-SO_cUTe:)}```
 
 check hex  
 
-發現有其他檔案所以提出來  
+發現有其他檔案所以提出來 
 ```
 binwalk -e THJCC_IMAGE.png 
 ```
-最後看一下F3.png就有flag了
+最後看一下F3.png就有flag了 
 
 ### Provisioning in Progress
-![problem](../../assets/ASN.png)
+![problem](../../assets/ASN.png) 
 ##### flag:
 ```thjcc{only_announced_prefixes_are_real}```
 
-用whois查題目給的ASN  
+用whois查題目給的ASN 
 ```
 whois -h whois.ripe.net AS201943   
 ```
-但有些資訊被過濾掉了，沒有auth token，細看一下ip區塊  
+但有些資訊被過濾掉了，沒有auth token，細看一下ip區塊 
 ```
 whois -h whois.ripe.net -i origin AS201943   
 ```
-找到token
+找到token 
 ```AUTH: v1.fWxhZXJfZXJhX3NleGlmZXJwX2RlY251b25uYV95bG5ve2Njamh0``` 
-base64完再把字串反向就是flag了  
+base64完再把字串反向就是flag了 
 
 ### Metro
-![problem](../../assets/Metro.png)
+![problem](../../assets/Metro.png) 
 ##### flag:
 ```THJCC{A10-3F}```
 
-一眼機捷，北捷外面不應該這麼空曠  
+一眼機捷，北捷外面不應該這麼空曠 
 但我跟機捷不熟所以我把紅色告示牌放大看  
-桃園市蘆竹區公所:)  
-A10跟A11的二樓三樓都送一遍就好~~反正沒有次數限制~~  
+桃園市蘆竹區公所:) 
+A10跟A11的二樓三樓都送一遍就好~~反正沒有次數限制~~ 
 
 ### 哦更愛你了
-![problem](../../assets/ohhh.png)
+![problem](../../assets/ohhh.png) 
 ##### flag:
 ```THJCC{Y@JUNlKU}```
 
-##### hint:
+##### hint: 
 ```在這特別的日子裡，送給你們一首非常特別的歌曲，特別的八字給特別的你（忽略標點符號）``` 
 用exiftool看一下燒肉圖片，~~然後發現flag~~ 
 ```THJCC{fak3_flag}``` 
-用binwalk確認圖片發現有zip，提出之後發現要輸入密碼  
-把提示丟給LLM後得知是Create Date，輸入後就拿到flag了  
+用binwalk確認圖片發現有zip，提出之後發現要輸入密碼 
+把提示丟給LLM後得知是Create Date，輸入後就拿到flag了 
 
 ## Forensics
 ### Ransomware
-![problem](../../assets/ransomware.png)
+![problem](../../assets/ransomware.png) 
 ##### flag:
 ```THJCC{L1nK_R4Ns0mWar3_😭😭😭😭}```
 
@@ -176,7 +176,7 @@ decrypted = unpad(cipher.decrypt(encrypt), AES.block_size).decode('utf-8')
 print(decrypted)
 ```
 ### I use arch btw
-![problem](../../assets/arch.png)
+![problem](../../assets/arch.png) 
 ##### flag:
 ```THJCC{7h15_15_7h3_m3554g3....._1_u53_4rch_b7w}```
 
@@ -187,25 +187,25 @@ binwalk然後把zip提出來，裡面有readme.xlsx
 
 
 ### TV
-![problem](../../assets/tv.png)
+![problem](../../assets/tv.png) 
 ##### flag:
 ```THJCC{sSTv-is_aMaZINg}```
 
 SSTV Robot36 ~~我的耳朵要陣亡了~~ 
 用 Robot36 讀音檔就是flag了 
-![problem](../../assets/sstv.png)
+![problem](../../assets/sstv.png) 
 ~~看得出我手很抖~~ 
 
 ### ExBaby Shark Master
-![problem](../../assets/shark.png)
+![problem](../../assets/shark.png) 
 ##### flag:
 ```THJCC{1t'S-3Asy*-r1gh7?????}```  
-![problem](../../assets/wire.png)
+![problem](../../assets/wire.png) 
 打開wireshark點個HTTP就看到flag了 
 
 ## Web
 ### Las Vegas
-![problem](../../assets/lasvegas.png)
+![problem](../../assets/lasvegas.png) 
 ##### flag:
 ```THJCC{LUcKy_sEVen_7777777}```
 
@@ -214,7 +214,7 @@ SSTV Robot36 ~~我的耳朵要陣亡了~~
 curl -X POST http://chal.thjcc.org:14514/?n=777
 ```
 ### Ear👂
-![problem](../../assets/ear.png)
+![problem](../../assets/ear.png) 
 ##### flag:
 ```THJCC{U_kNoW-HOw-t0_uSe-EaR}```
 
@@ -229,7 +229,7 @@ curl http://chal.thjcc.org:1234/system.php
 ```
 
 ### A long tine ago...
-![problem](../../assets/longtime.png)
+![problem](../../assets/longtime.png) 
 ##### flag:
 ```THJCC{Meow_M3ow_Me0w}```
 
@@ -238,7 +238,7 @@ PHP版本 7.0.8，admin跟數字用弱型別比較會被轉成數字0
 參考 [這篇文章](https://hello-ctf.com/hc-web/php_basic/#_9)
 
 ### Secret File Viewer
-![problem](../../assets/secret.png)
+![problem](../../assets/secret.png) 
 ##### flag:
 ```THJCC{h0w_dID_y0u_br34k_q'5_pr073c710n???}```
 
@@ -247,11 +247,11 @@ PHP版本 7.0.8，admin跟數字用弱型別比較會被轉成數字0
 curl http://chal.thjcc.org:30000/download.php?file=/flag.txt
 ```
 ### No Way Out
-![problem](../../assets/noway.png)
+![problem](../../assets/noway.png) 
 ##### flag:
 ```THJCC{h4ppy_n3w_y34r_4nd_c0ngr47_u_byp4SS_th7_EXIT_n1ah4wg1n9198w4tqr8926g1n94e92gw65j1n89h21w921g9}```
 
-PHP偽協議，寫payload的時候有參考 [這篇文章](https://comate.baidu.com/zh/page/0htmcvemaj7)
+PHP偽協議，寫payload的時候有參考 [這篇文章](https://comate.baidu.com/zh/page/0htmcvemaj7) 
 總之就是利用php://filter把exit()兩兩對調讓它無法作用 
 然後我們的payload也要兩兩對調才可以在過濾後注入成功 
 剩下就是注意一下0.5的延遲 
@@ -296,7 +296,7 @@ for i in range(10):
 ```
 
 ### who is whois
-![problem](../../assets/whois.png)
+![problem](../../assets/whois.png) 
 ##### flag:
 ```THJCC{yeyoumeng_Wh0i5_SsRf}```
 
@@ -363,7 +363,7 @@ print(response.text)
 
 
 ### 0422
-![problem](../../assets/0422.png)
+![problem](../../assets/0422.png) 
 ##### flag:
 ```THJCC{c00k135_4r3_n07_53cur3_1f_n07_51gn3d_4nd_p13453_d0_7h3_53cur3_c0d1ng_r3v13w_101111} ```
 
@@ -371,7 +371,7 @@ print(response.text)
 
 ## Pwn
 ### ASCII Driver
-![problem](../../assets/ascii.png)
+![problem](../../assets/ascii.png) 
 ##### flag:
 ```THJCC{N4HH_H0W_D1D_Y0U_G4T_H4RE!?!?!}```
 
@@ -404,8 +404,8 @@ r.interactive()
 進去shell後cat flag.txt就好
 
 ## AI
-### Deep Inverse
-![problem](../../assets/deep.png)
+### Deep Inverse 
+![problem](../../assets/deep.png) 
 ##### flag:
 ```THJCC{Stoc4st1c_W3ight_D3sc3nt_M4st3r_xedrftginjk54896ghjbijkml52563201}```
 
@@ -471,12 +471,12 @@ print(f"\nvarify: {model(x).item():.4f}")
 跑完後Ctrl + C 
 nc後Ctrl + V 
 
-### NEURAL_OVERRIDE
-![problem](../../assets/neural.png)
-flag:
+### NEURAL_OVERRIDE 
+![problem](../../assets/neural.png) 
+##### flag:
 ```THJCC{y0ur_ar3_the_adv3rs3r1al_attack_m0st3r}```
 
-題目要我們生一個.pt上傳然後要符合
+題目要我們生一個.pt上傳然後要符合 
 ```
 L2_DIST_LIMIT: < 0.05
 MIN_CONFIDENCE: 90.00%
@@ -497,7 +497,7 @@ torch.save(Exploit(), 'payload.pt', _use_new_zipfile_serialization=True)
 ```
 
 ### Steal My model
-![problem](../../assets/steal.png)
+![problem](../../assets/steal.png) 
 ##### flag:
 ```THJCC{4f13ba53b0e15515852eecf90d534072}```
 
