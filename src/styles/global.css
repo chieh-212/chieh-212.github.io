@@ -1,120 +1,126 @@
-/* 簡潔技術風，支援亮/暗模式 */
+/* 支援亮/暗模式的極簡技術風 */
 
 :root {
-	--bg-color: #FAFAFA;
-	--text-color: #181818;
-	--text-muted: #5f6368;
-	--border-color: #E5E5E5;
-	--accent: 38, 132, 255;
-	--code-bg: #f5f5f5;
-	--quote-border: #d0d0d0;
-	--box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+    /* 預設為暗色模式 (Dark Mode) */
+    --bg-color: #000000;
+    --text-color: #eeeeee;
+    --text-muted: #a0a0a0;
+    --border-color: #333333;
+    --accent: 255, 215, 0; /* 金色亮點 */
+    --code-bg: #1a1a1a;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 當 HTML 標籤有 .light 類別時切換顏色 */
+html.light {
+    --bg-color: #FAFAFA;
+    --text-color: #181818;
+    --text-muted: #5f6368;
+    --border-color: #E5E5E5;
+    --code-bg: #f5f5f5;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 @font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
-	font-weight: 400; font-style: normal; font-display: swap;
+    font-family: 'Atkinson';
+    src: url('/fonts/atkinson-regular.woff') format('woff');
+    font-weight: 400; font-style: normal; font-display: swap;
 }
 
 body {
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	font-family: 'Atkinson', sans-serif;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	font-size: 18px;
-	line-height: 1.7;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Atkinson', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    line-height: 1.7;
+    transition: background-color 0.3s, color 0.3s; /* 讓切換更平滑 */
 }
 
-/* 移除所有漸層背景 */
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+    width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 3em 1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5rem 0;
-	color: var(--text-color);
-	line-height: 1.2;
+    margin: 1.5rem 0 0.5rem 0; /* 增加上方間距，減少下方間距 */
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+/* 針對你的需求：縮小 h5 換行距離 */
+h5 {
+    margin-bottom: 0.1rem !important; 
+    font-size: 1.1rem;
 }
 
 a {
-	color: rgb(var(--accent));
-	text-decoration: none;
-	transition: opacity 0.2s;
+    color: rgb(var(--accent));
+    text-decoration: none;
+    transition: opacity 0.2s;
 }
 
 a:hover {
-	opacity: 0.8;
+    opacity: 0.8;
 }
 
-/* 修復程式碼區塊：不再有補丁感 */
+/* 全域圖片修正：防止跑版 */
+img {
+    max-width: 100% !important; /* 強制不超過視窗寬度 */
+    height: auto;               /* 保持比例 */
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+}
+
+/* 修復程式碼區塊 */
 code {
-	padding: 2px 5px;
-	background-color: var(--code-bg);
-	color: var(--text-color);
-	border-radius: 4px;
-	font-family: monospace;
-	font-size: 0.9em;
+    padding: 2px 5px;
+    background-color: var(--code-bg);
+    color: var(--text-color);
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
 }
 
 pre {
-	padding: 1.5em;
-	border-radius: 8px;
-	background-color: var(--code-bg) !important;
-	border: 1px solid var(--border-color);
-	overflow-x: auto;
-	margin: 1.5rem 0;
+    padding: 1.5em;
+    border-radius: 8px;
+    background-color: var(--code-bg) !important;
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    margin: 1.5rem 0;
 }
 
 pre > code {
-	all: unset; /* 清除 inline code 的樣式 */
-	font-family: 'Fira Code', monospace;
-	font-size: 0.9rem;
-	color: var(--text-color);
-}
-
-.article-body img,
-.hero-image img {
-	max-width: 100%;
-	height: auto;
-	display: block;
-	margin: 1.5rem auto;
-	border-radius: 12px;
-}
-
-.article-body figure {
-	margin: 1.5rem 0;
+    all: unset;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--text-color);
 }
 
 /* 引用區塊 */
 blockquote {
-	border-left: 3px solid rgb(var(--accent));
-	padding: 0 0 0 20px;
-	margin: 2rem 0;
-	font-style: italic;
-	color: var(--text-muted);
+    border-left: 3px solid rgb(var(--accent));
+    padding: 0 0 0 20px;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--text-muted);
 }
 
 hr {
-	border: none;
-	border-top: 1px solid var(--border-color);
-	margin: 2rem 0;
-}
-
-/* 輔助類別 */
-.sr-only {
-	position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-	overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
 }
 
 @media (max-width: 720px) {
-	body { font-size: 16px; }
-	main { padding: 1em; }
+    body { font-size: 16px; }
+    main { padding: 1em; }
 }
