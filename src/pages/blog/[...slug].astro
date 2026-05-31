@@ -83,8 +83,18 @@ const { Content } = await render(post);
     /* 文章主體內容 */
     .article-body { line-height: 1.8; font-size: 1.1rem; color: var(--text-color); }
     .article-body :global(p) { margin-bottom: 1.6rem; }
+    .article-body :global(h1),
+    .article-body :global(h2),
+    .article-body :global(h3),
+    .article-body :global(h4),
+    .article-body :global(h5),
+    .article-body :global(h6) {
+        color: var(--text-color);
+    }
     .article-body :global(h2) { margin: 3rem 0 1.2rem 0; font-size: 1.8rem; }
     .article-body :global(h3) { margin: 2rem 0 1rem 0; font-size: 1.4rem; }
+    .article-body :global(h4) { margin: 2rem 0 0.9rem 0; font-size: 1.1rem; }
+    .article-body :global(h5) { margin: 1.6rem 0 0.65rem 0; font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; }
 
     /* 程式碼區塊修復 (HackMD/GitHub 風格) */
     .article-body :global(pre) {
@@ -92,7 +102,7 @@ const { Content } = await render(post);
         padding: 1.2rem;
         border-radius: 8px;
         background-color: #1e1e1e !important; 
-        margin: 2rem 0;
+        margin: 1.6rem 0;
         overflow-x: auto;
     }
     .article-body :global(pre code) {

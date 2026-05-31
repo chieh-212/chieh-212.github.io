@@ -1,13 +1,14 @@
-/* 完全統一的全黑極簡風格 */
+/* 簡潔技術風，支援亮/暗模式 */
 
 :root {
-	/* 核心配比：About 頁面的黑與白 */
-	--black: 255, 255, 255;    /* 標題與主要文字 */
-	--white: 0, 0, 0;          /* 純黑背景 */
-	--gray: 180, 180, 180;     /* 次要文字與日期 */
-	--gray-light: 40, 40, 40;  /* 分割線與程式碼底色 */
-	--accent: 255, 215, 0;     /* 亮點金/紫（視你喜好可改） */
-	--box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+	--bg-color: #FAFAFA;
+	--text-color: #181818;
+	--text-muted: #5f6368;
+	--border-color: #E5E5E5;
+	--accent: 38, 132, 255;
+	--code-bg: #f5f5f5;
+	--quote-border: #d0d0d0;
+	--box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 @font-face {
@@ -17,8 +18,8 @@
 }
 
 body {
-	background-color: #000000; /* 強制全黑 */
-	color: #eeeeee;            /* 預設文字偏米白，不刺眼 */
+	background-color: var(--bg-color);
+	color: var(--text-color);
 	font-family: 'Atkinson', sans-serif;
 	margin: 0;
 	padding: 0;
@@ -39,7 +40,7 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: var(--text-color);
 	line-height: 1.2;
 }
 
@@ -56,8 +57,8 @@ a:hover {
 /* 修復程式碼區塊：不再有補丁感 */
 code {
 	padding: 2px 5px;
-	background-color: #2a2a2a; /* 稍微亮一點的深灰區分文字 */
-	color: #e0e0e0;
+	background-color: var(--code-bg);
+	color: var(--text-color);
 	border-radius: 4px;
 	font-family: monospace;
 	font-size: 0.9em;
@@ -66,8 +67,8 @@ code {
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
-	background-color: #1a1a1a !important; /* 強制深黑底 */
-	border: 1px solid #333;
+	background-color: var(--code-bg) !important;
+	border: 1px solid var(--border-color);
 	overflow-x: auto;
 	margin: 1.5rem 0;
 }
@@ -76,7 +77,20 @@ pre > code {
 	all: unset; /* 清除 inline code 的樣式 */
 	font-family: 'Fira Code', monospace;
 	font-size: 0.9rem;
-	color: #dcdcdc;
+	color: var(--text-color);
+}
+
+.article-body img,
+.hero-image img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 1.5rem auto;
+	border-radius: 12px;
+}
+
+.article-body figure {
+	margin: 1.5rem 0;
 }
 
 /* 引用區塊 */
@@ -85,12 +99,12 @@ blockquote {
 	padding: 0 0 0 20px;
 	margin: 2rem 0;
 	font-style: italic;
-	color: rgb(var(--gray));
+	color: var(--text-muted);
 }
 
 hr {
 	border: none;
-	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid var(--border-color);
 	margin: 2rem 0;
 }
 

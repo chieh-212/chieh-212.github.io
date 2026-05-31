@@ -30,7 +30,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li {
 				margin-bottom: 2.5rem;
-				border-bottom: 1px solid #eee;
+				border-bottom: 1px solid var(--border-color);
 				padding-bottom: 1.5rem;
 			}
 			ul li:last-child {
@@ -43,14 +43,14 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.title {
 				margin: 0 0 0.5rem 0;
-				color: rgb(var(--black));
+				color: var(--text-color);
 				line-height: 1.2;
 				font-size: 1.5rem;
 				font-weight: 600;
 			}
 			.date {
 				margin: 0 0 0.75rem 0;
-				color: rgb(var(--gray));
+				color: var(--text-muted);
 				font-family: monospace;
 				font-size: 0.9rem;
 			}
@@ -65,7 +65,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.description {
 				margin: 0;
-				color: #555;
+				color: var(--text-muted);
 				font-size: 1rem;
 				line-height: 1.5;
 			}
