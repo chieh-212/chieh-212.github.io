@@ -5,6 +5,8 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
+import EHBlack from '../assets/EH_black.png';
+import EHWhite from '../assets/EH_white.png';
 
 interface Props {
 	title: string;
@@ -20,8 +22,29 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- Color-scheme aware favicon -->
+<link rel="icon" href={EHBlack} media="(prefers-color-scheme: light)" />
+<link rel="icon" href={EHWhite} media="(prefers-color-scheme: dark)" />
+<!-- fallbacks -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
+<!-- Ensure favicon switches on browsers that ignore media on <link> -->
+<script is:inline>
+	(function(){
+		try{
+			const EH_BLACK = "{EHBlack}";
+			const EH_WHITE = "{EHWhite}";
+			const setFavicon = (url)=>{
+				let el = document.querySelector('link[data-theme-favicon]');
+				if(!el){ el = document.createElement('link'); el.rel='icon'; el.setAttribute('data-theme-favicon','true'); document.head.appendChild(el); }
+				el.href = url;
+			};
+			const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+			setFavicon(mq && mq.matches ? EH_WHITE : EH_BLACK);
+			if(mq && mq.addEventListener) mq.addEventListener('change', e=> setFavicon(e.matches ? EH_WHITE : EH_BLACK));
+		}catch(e){/* noop */}
+	})();
+</script>
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
 	rel="alternate"
