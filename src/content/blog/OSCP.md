@@ -5,6 +5,6 @@ pubDate: 2026-08-30
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 
-# 大坐牢，8/26，現在才讀四分之一:))
+# 大坐牢，8/26考，現在才讀四分之一:))
 btw, although I learned some from OSCP course but I still am a pentest noob;(  
 stay tuned to see if this is my final week of summer or my final week of life XD
