@@ -4,7 +4,6 @@ description: "第一場打得比較好的CTF"
 pubDate: 2026-03-26
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
-
 # THJCC2026_writeup
 scoreboard: THJCC_EH  
 final score: 3555 points  

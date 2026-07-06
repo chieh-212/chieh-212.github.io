@@ -53,7 +53,7 @@ r.send(p2)
 r.interactive()
 ```
 ## orw
-##### discription: Just a start
+##### discription: Read the flag from /home/orw/flag. Only open read write syscall are allowed to use.
 ##### checksec
 ```
 $ checksec orw
