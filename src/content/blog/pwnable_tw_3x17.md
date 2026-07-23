@@ -2,6 +2,7 @@
 title: "pwnable.tw_3x17_writeup"
 description: "challenge: 3x17"
 pubDate: 2026-07-08
+draft: true
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 ## 3x17

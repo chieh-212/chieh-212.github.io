@@ -2,6 +2,7 @@
 title: "OSCP心得"
 description: "從吃飯會流口水的腳本小子變成pentest入門菜鳥"
 pubDate: 2026-08-30
+draft: true
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 
@@ -59,5 +60,20 @@ marco：
 今天打了不需要提權只需要防止跳SMB兔子洞的靶機 Bratarina  
 應該是我近期打過最友善的靶機了，二十分鐘解決......除了怎麼用 py 開 rev shell 有點麻煩以外  
 ### 115/7/19  
+AIS3 Day0  
 進度到19完  
-並且打了 Pebbles 這個靶機，~~然後打到在宿舍生氣，打到 rev shell 後就暫停去睡覺了~~
+並且打了 Pebbles 這個靶機，~~然後打到在宿舍生氣，打到 rev shell 後就暫停去睡覺了~~  
+### 115/7/20
+AIS3 Day1  
+進度沒變，~~上到九點有點體力不支~~  
+### 115/7/21
+AIS3 Day2  
+同上xD，但通識課好玩，最後Kahoot玩到第八名  
+### 115/7/22
+AIS3 Day3  
+同上  
+btw 我真的超想去上 VM 逃逸，但因為專題選 AI 所以只能在樓上聽逆向跟Fuzzing...( 我也不知道為什麼是逆向xD )  
+### 115/7/23
+AIS3 Day4  
+進度到20完  
+應該七月結束前可以讀完AD  
