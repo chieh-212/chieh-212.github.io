@@ -2,7 +2,6 @@
 title: "OSCP心得"
 description: "從吃飯會流口水的腳本小子變成pentest入門菜鳥"
 pubDate: 2026-08-30
-draft: true
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 
@@ -57,15 +56,16 @@ marco：
 ### 115/7/17
 因為中間有教育部攻防演練加上我要寫教材，所以空了四天，但攻防演練應該也算有練到一點點...？  
 ~~但到底為什麼 SXSS 可以被打低衝擊~~  
-今天打了不需要提權只需要防止跳SMB兔子洞的靶機 Bratarina  
+今天打了不需要提權只需要防止跳 SMB 兔子洞的靶機 Bratarina  
 應該是我近期打過最友善的靶機了，二十分鐘解決......除了怎麼用 py 開 rev shell 有點麻煩以外  
 ### 115/7/19  
 AIS3 Day0  
 進度到19完  
-並且打了 Pebbles 這個靶機，~~然後打到在宿舍生氣，因為聽說 official walkthrough 直接用 sqlmap 打到 root，可惡~~  
+並且打了 Pebbles 這個靶機，~~然後打到在宿舍生氣，因為聽說 walkthrough 直接用 sqlmap 打到 root，可惡~~  
 ### 115/7/20
 AIS3 Day1  
 進度沒變，~~上到九點有點體力不支~~  
+> 然後我突然想到我**在購買時並沒有備註我未成年，好像該寫個信**
 ### 115/7/21
 AIS3 Day2  
 同上xD，但通識課好玩，最後Kahoot玩到第八名  
@@ -94,3 +94,10 @@ AIS3 Day7
 接下來就是邊打靶機邊把沒要考的 AWS 看完  
 ### 115/8/3
 靶機 Kevin one shot  
+靶機 Nibbles、Hetemit  
+### 115/8/6  
+靶機 Algernon one shot  
+靶機 Internal、Jacko  
+然後因為打 Jacko 所以認識了馬鈴薯家族跟 PrintSpoofer  
+### 115/8/11  
+靶機 ZenPhoto  
