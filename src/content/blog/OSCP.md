@@ -2,12 +2,13 @@
 title: "OSCP心得"
 description: "從吃飯會流口水的腳本小子變成pentest入門菜鳥"
 pubDate: 2026-08-30
+draft: true
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 
 ## 前言
 我在找到女婕思隊友後，鴨鴨拉了 macro 進來當指導老師，簡單聊了一下後知道電神在準備 OSCP，  
-心一橫就買下去了，~~立志當第一位持有 OSCP+/OSCP 的女高中生~~  
+心一橫就買下去了，~~立志當第一位持有 OSCP+/OSCP 的臺灣女高中生~~  
 btw，我在 GiCS 初賽前因為知道邦邦也是要特選，跟他說女婕思前二就 all in 特選，然後真的有前二xdd  
 不過刷下去 OSCP 後其實我女婕思的得失心也沒那麼重了，因為我覺得論比重肯定是 OSCP >>>> GiCS ，然後就第二了，~~有趣~~  
 ## 時間線
@@ -100,4 +101,4 @@ AIS3 Day7
 靶機 Internal、Jacko  
 然後因為打 Jacko 所以認識了馬鈴薯家族跟 PrintSpoofer  
 ### 115/8/11  
-靶機 ZenPhoto  
+靶機 ZenPhoto、Craft  

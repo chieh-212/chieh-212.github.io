@@ -2,6 +2,7 @@
 title: "資訊安全怎麼入坑"
 description: "學一輩子資訊安全吧 :3"
 pubDate: 2026-08-17
+draft: true
 heroImage: "../../assets/blog-placeholder-1.jpg"
 ---
 ## 前言  
