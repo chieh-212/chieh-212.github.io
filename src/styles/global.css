@@ -38,7 +38,7 @@ body {
     overflow-wrap: break-word;
     font-size: 18px;
     line-height: 1.7;
-    transition: background-color 0.3s, color 0.3s; /* 讓切換更平滑 */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 main {
